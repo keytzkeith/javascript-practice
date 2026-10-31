@@ -19,18 +19,43 @@
 
 // Bonus: Calculate how much money remains from a starting budget of KSh 5,000.
 
-const expenses = ["Rent", "Electricity", "Water", "Internet", "Food"]
+// 
+const expenses = [
+    { id: 1, name: "Groceries", amount: 850, category: "Food" },
+    { id: 2, name: "Transport", amount: 300, category: "Transport" },
+    { id: 3, name: "Internet", amount: 1500, category: "Utilities" },
+    { id: 4, name: "Lunch", amount: 250, category: "Food" },
+    { id: 5, name: "Electricity", amount: 500, category: "Utilities" },
+    { id: 6, name: "New Shirt", amount: 1200, category: "Shopping" },
+    { id: 7, name: "Movie", amount: 400, category: "Entertainment" },
+    { id: 8, name: "House Rent", amount: 4500, category: "Housing" },
+    { id: 9, name: "Breakfast", amount: 180, category: "Food" },
+    { id: 10, name: "Phone Repair", amount: 2000, category: "Other" }
+]
 
-const expenseType = {
-    name: this.name,
-    amount: this.amount,
-    category: (expenses) => {
-        for(let [expense, count] of Object.entries(expenses)) {
-            return expense
-        }
+
+
+const totalExpense = (expenses) => {
+    let numberOfExpense = 0
+    let totalExpense = 0
+    for (let i = 0; i < expenses.length; i++) {
+        numberOfExpense++
+        totalExpense += expenses[i].amount
     }
+    console.log(`Number of expenses: ${numberOfExpense}`)
+    console.log(`Total expenses: ${totalExpense}`)
 }
 
-const testExpense = expenseType.category(expenses)
-console.log(expenseType.name = 'Keith')
+const mostExpensive = () => {
+    const expensiveListAmount = []
+    for (let i = 0; i < expenses.length; i++) {
+        expensiveListAmount.push(expenses[i].amount)
+        
+    }
+    console.log(expensiveListAmount)
+}
 
+totalExpense(expenses)
+mostExpensive()
+
+ma
