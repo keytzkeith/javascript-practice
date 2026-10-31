@@ -42,20 +42,42 @@ const totalExpense = (expenses) => {
         numberOfExpense++
         totalExpense += expenses[i].amount
     }
+
     console.log(`Number of expenses: ${numberOfExpense}`)
     console.log(`Total expenses: ${totalExpense}`)
 }
 
 const mostExpensive = () => {
-    const expensiveListAmount = []
+    const expensiveItem = []
+    const expensiveAmount = []
     for (let i = 0; i < expenses.length; i++) {
-        expensiveListAmount.push(expenses[i].amount)
-        
+        expensiveItem.push(expenses[i].name)
+        expensiveAmount.push(expenses[i].amount)
     }
-    console.log(expensiveListAmount)
+    return {
+        name: expensiveItem,
+        amount: expensiveAmount
+    }
+
 }
 
-totalExpense(expenses)
-mostExpensive()
+const average = () => {
+    let sum = 0
+    for (let i = 0; i < expenses.length; i++)
+    {
+        sum += expenses[i].amount
+    }
+    return sum / expenses.length    
+}
 
-ma
+
+totalExpense(expenses)
+
+const { name, amount } = mostExpensive()
+
+const maxAmount = Math.max(...amount)
+const maxIndex = amount.indexOf(maxAmount)
+const correspondingName = name[maxIndex]
+console.log(`Most expensive expense: ${correspondingName}`)
+console.log(`Highest Amount: ${maxAmount}`)
+console.log(`Average expense: ${average()}`)
