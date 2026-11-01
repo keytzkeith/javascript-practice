@@ -34,8 +34,8 @@ const expenses = [
 ]
 
 
-
 const totalExpense = (expenses) => {
+    if (expenses.length === 0) return null
     let numberOfExpense = 0
     let expenseTotal = 0
     for (let i = 0; i < expenses.length; i++) {
@@ -62,14 +62,10 @@ const mostExpensive = (expenses) => {
 }
 
 const average = (expenses) => {
-    let sum = 0
-    for (let i = 0; i < expenses.length; i++) {
-        sum += expenses[i].amount
-    }
-    return sum / expenses.length
+    if (expenses.length === 0) return null
+    const { expenseTotal } = totalExpense(expenses)
+    return expenseTotal / expenses.length
 }
-
-
 
 
 const { numberOfExpense, expenseTotal } = totalExpense(expenses)
