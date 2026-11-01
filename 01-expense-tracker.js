@@ -58,7 +58,6 @@ const mostExpensive = () => {
         name: expensiveItem,
         amount: expensiveAmount
     }
-
 }
 
 const average = () => {
