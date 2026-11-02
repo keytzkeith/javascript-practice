@@ -38,6 +38,7 @@ const students = [
     { id: 10, name: "Ann", marks: 95 }
 ];
 
+
 const checkGrade = (marks) => {
     if (marks >= 80 && marks <= 100) {
         return "A"
@@ -49,29 +50,59 @@ const checkGrade = (marks) => {
         return "D"
     } else if (marks >= 0 && marks <= 49) {
         return "F"
-    }
-
+    } else return null
 }
 
-const studentsGrade = (students) => {
-    const grades = []
-    
-    for (let i = 0; i < students.length; i++){
-        grades.push(students[i].marks)
-    }
-    return grades
+const checkPass = (marks) => {
+    if (marks >= 50 && marks <= 100) {
+        return "Pass"
+    } else if (marks >= 0 && marks <= 49) {
+        return "Fail"
+    } else return null
 }
 
-const classAverage = () => {
+// Gets the marks
+const studentsMarks = (students) => {
+    const marks = []
+
+    for (let i = 0; i < students.length; i++) {
+        marks.push(students[i].marks)
+    }
+    return marks
+}
+
+const allStudentsName = (students) => {
+    const studentsList = []
+
+    for (let i = 0; i < students.length; i++) {
+        studentsList.push(students[i].name)
+    }
+    return studentsList
+}
+
+
+// Gets the avearage
+const classAverage = (marks) => {
+    if (marks.length === 0) return null
+    const totalMarks = (total, mark) => {
+        return total + mark
+    }
+    const average = marks.reduce(totalMarks) / marks.length
     return average
 }
 
 
-const marks = studentsGrade(students)
-for (let i = 0; i < marks.length; i++) {
-    const grade = checkGrade(marks[i])
-    console.log(grade)
+const studentsNames = allStudentsName(students)
+const marks = studentsMarks(students)
+const grades = marks.map(checkGrade)
+const passMark = marks.map(checkPass)
+
+for (let i = 0; i < students.length; i++) {
+    console.log(studentsNames[i])
+    console.log(marks[i])
+    console.log(grades[i])
+    console.log(passMark[i])
 }
 
-
-// console.log(g)
+const average = classAverage(marks)
+// console.log(average)
