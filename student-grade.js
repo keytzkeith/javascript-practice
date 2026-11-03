@@ -106,7 +106,6 @@ const highestPerformer = (students) => {
 
 const topStudent = highestPerformer(students)
 
-
 const studentsNames = allStudentsName(students)
 const marks = studentsMarks(students)
 const grades = marks.map(checkGrade)
@@ -122,3 +121,4 @@ console.log("\n========== CLASS SUMMARY ==========\n")
 console.log(`Total Students: ${students.length}`)
 console.log(`Class Average: ${average}`)
 console.log(`Highest Performer: ${topStudent.highestStudentName} (${topStudent.highestStudentMark})`)
+console.log(passMark)
