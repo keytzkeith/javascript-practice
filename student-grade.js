@@ -91,18 +91,34 @@ const classAverage = (marks) => {
     return average
 }
 
+const highestPerformer = (students) => {
+    if (students.length === 0) return null
+
+    const highestStudent = students.reduce((max, current) =>
+        current.marks > max.marks ? current : max
+    )
+
+    return {
+        highestStudentName: highestStudent.name,
+        highestStudentMark: highestStudent.marks
+    }
+}
+
+const topStudent = highestPerformer(students)
+
 
 const studentsNames = allStudentsName(students)
 const marks = studentsMarks(students)
 const grades = marks.map(checkGrade)
 const passMark = marks.map(checkPass)
+const average = classAverage(marks)
 
+console.log("========== STUDENT RESULTS ==========\n")
 for (let i = 0; i < students.length; i++) {
-    console.log(studentsNames[i])
-    console.log(marks[i])
-    console.log(grades[i])
-    console.log(passMark[i])
+    console.log(`${studentsNames[i]} | ${marks[i]} | ${grades[i]} | ${passMark[i]}`)
 }
 
-const average = classAverage(marks)
-// console.log(average)
+console.log("\n========== CLASS SUMMARY ==========\n")
+console.log(`Total Students: ${students.length}`)
+console.log(`Class Average: ${average}`)
+console.log(`Highest Performer: ${topStudent.highestStudentName} (${topStudent.highestStudentMark})`)
