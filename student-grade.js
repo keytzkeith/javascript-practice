@@ -39,6 +39,8 @@ const students = [
 ];
 
 
+
+
 const checkGrade = (marks) => {
     if (marks >= 80 && marks <= 100) {
         return "A"
@@ -71,6 +73,7 @@ const studentsMarks = (students) => {
     return marks
 }
 
+
 const allStudentsName = (students) => {
     const studentsList = []
 
@@ -91,6 +94,7 @@ const classAverage = (marks) => {
     return average
 }
 
+// Get highest marks studend and name
 const highestPerformer = (students) => {
     if (students.length === 0) return null
 
@@ -104,6 +108,13 @@ const highestPerformer = (students) => {
     }
 }
 
+const getStudentsInfo = (students) => {
+    const studentInfo = students.map(({key, value}) => ({ [key]: value}))
+    return studentInfo
+}
+
+console.log(getStudentsInfo(students))
+
 const topStudent = highestPerformer(students)
 
 const studentsNames = allStudentsName(students)
@@ -112,13 +123,17 @@ const grades = marks.map(checkGrade)
 const passMark = marks.map(checkPass)
 const average = classAverage(marks)
 
-console.log("========== STUDENT RESULTS ==========\n")
-for (let i = 0; i < students.length; i++) {
-    console.log(`${studentsNames[i]} | ${marks[i]} | ${grades[i]} | ${passMark[i]}`)
-}
+const passedStudents = passMark.filter((mark) => mark.match("Pass")).length
+const failedStudents = passMark.filter((mark) => mark.match("Fail")).length
 
-console.log("\n========== CLASS SUMMARY ==========\n")
-console.log(`Total Students: ${students.length}`)
-console.log(`Class Average: ${average}`)
-console.log(`Highest Performer: ${topStudent.highestStudentName} (${topStudent.highestStudentMark})`)
-console.log(passMark)
+// console.log("========== STUDENT RESULTS ==========\n")
+// for (let i = 0; i < students.length; i++) {
+//     console.log(`${studentsNames[i]} | ${marks[i]} | ${grades[i]} | ${passMark[i]}`)
+// }
+
+// console.log("\n========== CLASS SUMMARY ==========\n")
+// console.log(`Total Students: ${students.length}`)
+// console.log(`Class Average: ${average}`)
+// console.log(`Highest Performer: ${topStudent.highestStudentName} (${topStudent.highestStudentMark})`)
+// console.log(passedStudents)
+// console.log(failedStudents)
