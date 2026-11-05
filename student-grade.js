@@ -64,24 +64,24 @@ const checkPass = (marks) => {
 }
 
 // Gets the marks
-const studentsMarks = (students) => {
-    const marks = []
+// const studentsMarks = (students) => {
+//     const marks = []
 
-    for (let i = 0; i < students.length; i++) {
-        marks.push(students[i].marks)
-    }
-    return marks
-}
+//     for (let i = 0; i < students.length; i++) {
+//         marks.push(students[i].marks)
+//     }
+//     return marks
+// }
 
 
-const allStudentsName = (students) => {
-    const studentsList = []
+// const allStudentsName = (students) => {
+//     const studentsList = []
 
-    for (let i = 0; i < students.length; i++) {
-        studentsList.push(students[i].name)
-    }
-    return studentsList
-}
+//     for (let i = 0; i < students.length; i++) {
+//         studentsList.push(students[i].name)
+//     }
+//     return studentsList
+// }
 
 
 // Gets the avearage
@@ -108,27 +108,32 @@ const highestPerformer = (students) => {
     }
 }
 
-const getStudentsInfo = (students) => {
-    const studentInfo = students.map(({key, value}) => ({ [key]: value}))
-    return studentInfo
-}
+const getStudentsInfo = students.map((student) => {
+    const studentName = student.name
+    const marks = student.marks
 
-console.log(getStudentsInfo(students))
+    const studentGrade = checkGrade(marks)
+    const passStatus = checkPass(marks)
+
+    return {name: studentName, marks: marks, grade: studentGrade, status: passStatus}
+})
+
+console.log(getStudentsInfo)
 
 const topStudent = highestPerformer(students)
 
-const studentsNames = allStudentsName(students)
-const marks = studentsMarks(students)
-const grades = marks.map(checkGrade)
-const passMark = marks.map(checkPass)
-const average = classAverage(marks)
+// const studentsNames = allStudentsName(students)
+// const marks = studentsMarks(students)
+// const grades = marks.map(checkGrade)
+// const passStatus = marks.map(checkPass)
+// const average = classAverage(marks)
 
-const passedStudents = passMark.filter((mark) => mark.match("Pass")).length
-const failedStudents = passMark.filter((mark) => mark.match("Fail")).length
+// const passedStudents = passStatus.filter((mark) => mark.match("Pass")).length
+// const failedStudents = passStatus.filter((mark) => mark.match("Fail")).length
 
 // console.log("========== STUDENT RESULTS ==========\n")
 // for (let i = 0; i < students.length; i++) {
-//     console.log(`${studentsNames[i]} | ${marks[i]} | ${grades[i]} | ${passMark[i]}`)
+//     console.log(`${studentsNames[i]} | ${marks[i]} | ${grades[i]} | ${passStatus[i]}`)
 // }
 
 // console.log("\n========== CLASS SUMMARY ==========\n")
