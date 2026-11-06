@@ -34,50 +34,44 @@ const expenses = [
 ]
 
 
-
 const totalExpense = (expenses) => {
+    if (expenses.length === 0) return null
     let numberOfExpense = 0
-    let totalExpense = 0
+    let expenseTotal = 0
     for (let i = 0; i < expenses.length; i++) {
         numberOfExpense++
-        totalExpense += expenses[i].amount
-    }
-
-    console.log(`Number of expenses: ${numberOfExpense}`)
-    console.log(`Total expenses: ${totalExpense}`)
-}
-
-const mostExpensive = () => {
-    const expensiveItem = []
-    const expensiveAmount = []
-    for (let i = 0; i < expenses.length; i++) {
-        expensiveItem.push(expenses[i].name)
-        expensiveAmount.push(expenses[i].amount)
+        expenseTotal += expenses[i].amount
     }
     return {
-        name: expensiveItem,
-        amount: expensiveAmount
+        numberOfExpense: numberOfExpense,
+        expenseTotal: expenseTotal
     }
-
 }
 
-const average = () => {
-    let sum = 0
-    for (let i = 0; i < expenses.length; i++)
-    {
-        sum += expenses[i].amount
+const mostExpensive = (expenses) => {
+    if (expenses.length === 0) return null
+
+    const expensiveItem = expenses.reduce((max, current) =>
+        current.amount > max.amount ? current : max
+    )
+
+    return {
+        highestExpenseName: expensiveItem.name,
+        highestExpenseAmount: expensiveItem.amount
     }
-    return sum / expenses.length    
+}
+
+const average = (expenses) => {
+    if (expenses.length === 0) return null
+    const { expenseTotal } = totalExpense(expenses)
+    return expenseTotal / expenses.length
 }
 
 
-totalExpense(expenses)
-
-const { name, amount } = mostExpensive()
-
-const maxAmount = Math.max(...amount)
-const maxIndex = amount.indexOf(maxAmount)
-const correspondingName = name[maxIndex]
-console.log(`Most expensive expense: ${correspondingName}`)
-console.log(`Highest Amount: ${maxAmount}`)
-console.log(`Average expense: ${average()}`)
+const { numberOfExpense, expenseTotal } = totalExpense(expenses)
+console.log(`Number of expenses: ${numberOfExpense}`)
+console.log(`Total expenses: ${expenseTotal}`)
+const { highestExpenseName, highestExpenseAmount } = mostExpensive(expenses)
+console.log(`Most expensive expense: ${highestExpenseName}`)
+console.log(`Highest Amount: ${highestExpenseAmount}`)
+console.log(`Average expense: ${average(expenses)}`)
