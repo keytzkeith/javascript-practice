@@ -49,8 +49,8 @@ const getStudentsInfo = students.map((student) => {
 const highestPerformer = (students) => {
     if (students.length === 0) return null
 
-    const highestStudent = students.reduce((max, current) =>
-        current.marks > max.marks ? current : max
+    const highestStudent = students.reduce(
+        (max, current) => current.marks > max.marks ? current : max
     )
 
     return {
@@ -61,14 +61,11 @@ const highestPerformer = (students) => {
 
 // Gets the avearage
 const classAverage = () => {
-    const marks = getStudentsInfo.map((student) => {
-        return student.marks
-    })
-    if (marks.length === 0) return null
-    const totalMarks = (total, mark) => {
-        return total + mark
-    }
-    const average = marks.reduce(totalMarks) / marks.length
+    const sumMarks = getStudentsInfo.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.marks, 0
+    )
+
+    const average = sumMarks / getStudentsInfo.length
     return average
 }
 
@@ -76,7 +73,7 @@ const passedStudents = getStudentsInfo.filter(student => student.status === "Pas
 const failedStudents = getStudentsInfo.filter(student => student.status === "Fail").length
 
 console.log("========== STUDENT RESULTS ==========\n")
-// console.log(getStudentsInfo)
+console.log("NAME | MARKS | GRADE | STATUS")
 getStudentsInfo.forEach((student) => {
     console.log(`${(student.name).padEnd(6)} | ${student.marks} | ${student.grade} | ${student.status}`)
 })
@@ -90,3 +87,5 @@ const topStudent = highestPerformer(getStudentsInfo)
 console.log(`Pass Count: ${passedStudents}`)
 console.log(`Fail Count: ${failedStudents}`)
 console.log(`Highest Performer: ${topStudent.highestStudentName} (${topStudent.highestStudentMark})`)
+console.log(`Pass Rate: ${(passedStudents / getStudentsInfo.length) * 100}`)
+console.log(`Fail Rate: ${(failedStudents / getStudentsInfo.length) * 100}`)
