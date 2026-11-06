@@ -1,29 +1,3 @@
-// Step 1. Create a function that accepts a student's marks and returns their grade.
-
-// Step 2. Create a function that calculates the class average.
-
-// Step 3. Find the student with the highest marks.
-
-// Step 4. Find all students who passed(marks 50 and above).
-
-// Step 5. Count how many students achieved each grade.
-
-// Step 6. Generate a summary showing the class average, highest performer, pass count and grade distribution.
-// New JavaScript concepts to explore
-// This challenge is where I want you to experiment with:
-// - .map() — transforming data.
-// - .filter() — selecting specific records.
-// - .reduce() — accumulating results.
-// - .find() — locating an element.
-
-// Use these grading rules:
-// Marks	Grade
-// 80–100	A
-// 70–79	B
-// 60–69	C
-// 50–59	D
-// 0–49	F
-
 // Student records for the grade calculator
 const students = [
     { id: 1, name: "Brian", marks: 85 },
@@ -37,9 +11,6 @@ const students = [
     { id: 9, name: "Peter", marks: 49 },
     { id: 10, name: "Ann", marks: 95 }
 ];
-
-
-
 
 const checkGrade = (marks) => {
     if (marks >= 80 && marks <= 100) {
@@ -63,36 +34,16 @@ const checkPass = (marks) => {
     } else return null
 }
 
-// Gets the marks
-// const studentsMarks = (students) => {
-//     const marks = []
+const getStudentsInfo = students.map((student) => {
+    const studentGrade = checkGrade(student.marks)
+    const passStatus = checkPass(student.marks)
 
-//     for (let i = 0; i < students.length; i++) {
-//         marks.push(students[i].marks)
-//     }
-//     return marks
-// }
-
-
-// const allStudentsName = (students) => {
-//     const studentsList = []
-
-//     for (let i = 0; i < students.length; i++) {
-//         studentsList.push(students[i].name)
-//     }
-//     return studentsList
-// }
-
-
-// Gets the avearage
-const classAverage = (marks) => {
-    if (marks.length === 0) return null
-    const totalMarks = (total, mark) => {
-        return total + mark
+    return {
+        ...student,
+        grade: studentGrade,
+        status: passStatus
     }
-    const average = marks.reduce(totalMarks) / marks.length
-    return average
-}
+})
 
 // Get highest marks studend and name
 const highestPerformer = (students) => {
@@ -108,37 +59,34 @@ const highestPerformer = (students) => {
     }
 }
 
-const getStudentsInfo = students.map((student) => {
-    const studentName = student.name
-    const marks = student.marks
+// Gets the avearage
+const classAverage = () => {
+    const marks = getStudentsInfo.map((student) => {
+        return student.marks
+    })
+    if (marks.length === 0) return null
+    const totalMarks = (total, mark) => {
+        return total + mark
+    }
+    const average = marks.reduce(totalMarks) / marks.length
+    return average
+}
 
-    const studentGrade = checkGrade(marks)
-    const passStatus = checkPass(marks)
+const passedStudents = getStudentsInfo.filter(student => student.status === "Pass").length
+const failedStudents = getStudentsInfo.filter(student => student.status === "Fail").length
 
-    return {name: studentName, marks: marks, grade: studentGrade, status: passStatus}
+console.log("========== STUDENT RESULTS ==========\n")
+// console.log(getStudentsInfo)
+getStudentsInfo.forEach((student) => {
+    console.log(`${(student.name).padEnd(6)} | ${student.marks} | ${student.grade} | ${student.status}`)
 })
 
-console.log(getStudentsInfo)
 
-const topStudent = highestPerformer(students)
+console.log("\n========== CLASS SUMMARY ==========\n")
+console.log(`Total Students: ${students.length}`)
+console.log(`Class Average: ${classAverage()}`)
 
-// const studentsNames = allStudentsName(students)
-// const marks = studentsMarks(students)
-// const grades = marks.map(checkGrade)
-// const passStatus = marks.map(checkPass)
-// const average = classAverage(marks)
-
-// const passedStudents = passStatus.filter((mark) => mark.match("Pass")).length
-// const failedStudents = passStatus.filter((mark) => mark.match("Fail")).length
-
-// console.log("========== STUDENT RESULTS ==========\n")
-// for (let i = 0; i < students.length; i++) {
-//     console.log(`${studentsNames[i]} | ${marks[i]} | ${grades[i]} | ${passStatus[i]}`)
-// }
-
-// console.log("\n========== CLASS SUMMARY ==========\n")
-// console.log(`Total Students: ${students.length}`)
-// console.log(`Class Average: ${average}`)
-// console.log(`Highest Performer: ${topStudent.highestStudentName} (${topStudent.highestStudentMark})`)
-// console.log(passedStudents)
-// console.log(failedStudents)
+const topStudent = highestPerformer(getStudentsInfo)
+console.log(`Pass Count: ${passedStudents}`)
+console.log(`Fail Count: ${failedStudents}`)
+console.log(`Highest Performer: ${topStudent.highestStudentName} (${topStudent.highestStudentMark})`)
