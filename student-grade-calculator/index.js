@@ -2,7 +2,7 @@
 const students = [
     { id: 1, name: "Brian", marks: 85 },
     { id: 2, name: "Sarah", marks: 72 },
-    { id: 3, name: "Kevin", marks: 45 },
+    // { id: 3, name: "Kevin", marks: 45 },
     { id: 4, name: "Mary", marks: 91 },
     { id: 5, name: "David", marks: 58 },
     { id: 6, name: "Faith", marks: 34 },
@@ -12,9 +12,19 @@ const students = [
     { id: 10, name: "Ann", marks: 95 }
 ];
 
+// Update new students
+const newStudentName = document.getElementById("first-name")
+const newStudentMarks = document.getElementById("marks")
+const addButton = document.getElementById("add")
+
+addButton.addEventListener("click", () => {
+    students.push({id: students.length + 1, name: newStudentName.value, marks: +newStudentMarks.value})
+    console.log(students)
+})
+
 
 const checkGrade = (marks) => {
-    if (marks > 100 || marks <= 0) return "Invalid"
+    if (marks > 100 || marks < 0) return "Invalid"
     if (marks >= 80 && marks <= 100) {
         return "A"
     } else if (marks >= 70 && marks <= 79) {
@@ -93,17 +103,27 @@ if (students.length === 0) {
     console.log(`Fail Rate: ${(failedStudents / getStudentsInfo.length) * 100}`)
 }
 
+// Update student table info
 const studentsTable = document.getElementById("students")
 const addRow = (number, name, marks, grade, status) => {
     const row = document.createElement("tr")
+
     row.innerHTML = `
-        ${number}
-        <td>${name}</td>
-        <td>${marks}</td>
-        <td>${grade}</td>
-        <td>${status}</td>
-    `
+    <td>${number}</td>
+    <td>${name}</td>
+            <td>${marks}</td>
+            <td>${grade}</td>
+            <td>${status}</td>
+            `
+
     studentsTable.appendChild(row)
 }
+if (getStudentsInfo.length === 0) {
+    studentsTable.innerHTML = `
+    <tr>
+    <td colspan="5">No student record found</td>
+    </tr>
+    ` } else {
 
-getStudentsInfo.forEach(student => addRow(student.id, student.name, student.marks, student.grade, student.status))
+    getStudentsInfo.forEach(student => addRow(student.id, student.name, student.marks, student.grade, student.status))
+}
