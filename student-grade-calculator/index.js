@@ -16,10 +16,33 @@ const students = [
 const newStudentName = document.getElementById("first-name")
 const newStudentMarks = document.getElementById("marks")
 const addButton = document.getElementById("add")
+const form = document.getElementById("form")
+const errorElement = document.getElementById('error')
 
-addButton.addEventListener("click", () => {
-    students.push({id: students.length + 1, name: newStudentName.value, marks: +newStudentMarks.value})
-    console.log(students)
+
+addButton.addEventListener("click", (e) => {
+    const messages = []
+    const newId = []
+    students.forEach((student) => {
+        newId.push(student.id)
+    })
+
+    if (newStudentName.value === '' || newStudentName.value === null) {
+        messages.push("Name is required")
+    } else if (newStudentMarks.value === '' || newStudentMarks.value === null) {
+        messages.push("Marks is required")
+    } else {
+        students.push({id: Math.max(...newId) + 1, name: newStudentName.value, marks: +newStudentMarks.value})
+        console.log(students)
+        e.preventDefault()
+    }
+
+    if (messages.length > 0) {
+        e.preventDefault()
+        errorElement.innerText = messages.join(', ')
+    } else {
+        errorElement.innerText = ''
+    }
 })
 
 
