@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <title>GradeLi Students Grade Tracker</title>
+</head>
+<body>
+    <nav>
+        <header>
+            <a href="gradeli-horizontal-logo.svg" class="logo"></a>
+            <span class="title">
+                <h1>Student Grade Calculator</h1>
+            </span>
+            <i class="fa-solid fa-bars"></i>
+        </header>
+    </nav>
+
+    <main>
+        <div class="main-info">
+            <div class="input-header">
+                <div class="details-input input">
+                    <input type="text" placeholder="First Name" id="first-name">
+                    <input type="text" placeholder="Marks" id="marks">
+                </div>
+                <div class="add-button btn">
+                    <button type="submit" id="add">
+                        <span class="btn-text">Add</span>
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Table record -->
+             <table>
+                <thead>
+                    <tr>No.</tr>
+                    <tr>Name</tr>
+                    <tr>Marks</tr>
+                    <tr>Grade</tr>
+                    <tr>Status</tr>
+                </thead>
+                <tbody id="students"></tbody>
+             </table>
+             <div class="bottom">
+                <div class="top-student">
+                    <span class="top-title">
+                        <h3>Top Student</h3>
+                    </span>
+                    <span class="top-name">Brian</span>
+                    <span class="top-marks">75</span>
+                    <span class="top-grade">A</span>
+                </div>
+                <div class="add-button btn">
+                    <button type="submit" id="add">
+                        <span class="btn-text">Calculate</span>
+                    </button>
+                </div>
+             </div>
+        </div>
+        <!-- Total students -->
+        <div class="summary-info">
+            <div class="total-students summary">
+                <span class="summary-label">
+                    Total Students
+                </span>
+                <h1 class="summary-value">10</h1>
+            </div>
+
+            <!-- Class average -->
+            <div class="class-average summary">
+                <span class="summary-label">
+                    Class Average
+                </span>
+                <h1 class="summary-value">67.4</h1>
+            </div>
+
+            <!-- Pass Fail Summary -->
+            <div class="pass-fail">
+                <div class="pass summary">
+                    <span class="summary-label">
+                        Pass
+                    </span>
+                    <h1 class="summary-value">07</h1>
+                    <span class="percentage">(70%)</span>
+                </div>
+
+                <div class="fail summary">
+                    <span class="summary-label">
+                        Fail
+                    </span>
+                    <h1 class="summary-value">03</h1>
+                    <span class="percentage">(30%)</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="index.js"></script>
+</body>
+</html>

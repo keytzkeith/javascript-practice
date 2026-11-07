@@ -12,7 +12,9 @@ const students = [
     { id: 10, name: "Ann", marks: 95 }
 ];
 
+
 const checkGrade = (marks) => {
+    if (marks > 100 || marks <= 0) return "Invalid"
     if (marks >= 80 && marks <= 100) {
         return "A"
     } else if (marks >= 70 && marks <= 79) {
@@ -27,6 +29,7 @@ const checkGrade = (marks) => {
 }
 
 const checkPass = (marks) => {
+    if (marks > 100 || marks < 0) return "Invalid"
     if (marks >= 50 && marks <= 100) {
         return "Pass"
     } else if (marks >= 0 && marks <= 49) {
@@ -47,7 +50,7 @@ const getStudentsInfo = students.map((student) => {
 
 // Get highest marks studend and name
 const highestPerformer = (students) => {
-    if (students.length === 0) return null
+    if (students.length === 0) return { highestStudentName: "N/A", highestStudentMark: 0 }
 
     const highestStudent = students.reduce(
         (max, current) => current.marks > max.marks ? current : max
@@ -72,20 +75,35 @@ const classAverage = () => {
 const passedStudents = getStudentsInfo.filter(student => student.status === "Pass").length
 const failedStudents = getStudentsInfo.filter(student => student.status === "Fail").length
 
-console.log("========== STUDENT RESULTS ==========\n")
-console.log("NAME | MARKS | GRADE | STATUS")
-getStudentsInfo.forEach((student) => {
-    console.log(`${(student.name).padEnd(6)} | ${student.marks} | ${student.grade} | ${student.status}`)
-})
+if (students.length === 0) {
+    console.log("No student record found")
+} else {
+    console.log("========== STUDENT RESULTS ==========\n")
+    console.table(getStudentsInfo)
 
+    console.log("\n========== CLASS SUMMARY ==========\n")
+    console.log(`Total Students: ${students.length}`)
+    console.log(`Class Average: ${classAverage()}`)
 
-console.log("\n========== CLASS SUMMARY ==========\n")
-console.log(`Total Students: ${students.length}`)
-console.log(`Class Average: ${classAverage()}`)
+    const topStudent = highestPerformer(getStudentsInfo)
+    console.log(`Pass Count: ${passedStudents}`)
+    console.log(`Fail Count: ${failedStudents}`)
+    console.log(`Highest Performer: ${topStudent.highestStudentName} (${topStudent.highestStudentMark})`)
+    console.log(`Pass Rate: ${(passedStudents / getStudentsInfo.length) * 100}`)
+    console.log(`Fail Rate: ${(failedStudents / getStudentsInfo.length) * 100}`)
+}
 
-const topStudent = highestPerformer(getStudentsInfo)
-console.log(`Pass Count: ${passedStudents}`)
-console.log(`Fail Count: ${failedStudents}`)
-console.log(`Highest Performer: ${topStudent.highestStudentName} (${topStudent.highestStudentMark})`)
-console.log(`Pass Rate: ${(passedStudents / getStudentsInfo.length) * 100}`)
-console.log(`Fail Rate: ${(failedStudents / getStudentsInfo.length) * 100}`)
+const studentsTable = document.getElementById("students")
+const addRow = (number, name, marks, grade, status) => {
+    const row = document.createElement("tr")
+    row.innerHTML = `
+        ${number}
+        <td>${name}</td>
+        <td>${marks}</td>
+        <td>${grade}</td>
+        <td>${status}</td>
+    `
+    studentsTable.appendChild(row)
+}
+
+getStudentsInfo.forEach(student => addRow(student.id, student.name, student.marks, student.grade, student.status))
