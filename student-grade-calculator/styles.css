@@ -72,7 +72,7 @@ main {
 .main-info {
     display: flex;
     flex-direction: column;
-    margin: 0 22px 22px 0;
+    margin: 0 0 22px 0;
 }
 
 
@@ -179,7 +179,7 @@ input:focus {
 }
 
 .top-student {
-    display: flex;
+    display: none;
     background-color: var(--secondary);
     width: 500px;
     height: 100%;
@@ -192,8 +192,9 @@ input:focus {
 }
 
 .summary-info {
-    width: 100%;
-    display: flex;
+    width: fit-content;
+    display: none;
+    margin-left: 22px;
     flex-direction: column;
     gap: 22px;
 }
@@ -231,5 +232,11 @@ input:focus {
 }
 
 .pass-fail .fail {
+    color: var(--danger);
+}
+
+#error {
+    font-size: .9em;
+    margin-bottom: 10px;
     color: var(--danger);
 }

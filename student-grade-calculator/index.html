@@ -10,7 +10,7 @@
 <body>
     <nav>
         <header>
-            <img src="gradeli-horizontal-logo.svg" class="logo"><img/>
+            <img src="gradeli-horizontal-logo.svg" class="logo" alt="GradeLi logo"/>
             <span class="title">
                 <h1>Student Grade Calculator</h1>
             </span>
@@ -25,7 +25,7 @@
                     <label for="first-name">First Name</label>
                     <input type="text" name="name" required placeholder="First Name" id="first-name">
                     <label for="marks">Marks</label>
-                    <input type="number" name="marks" required placeholder="Marks" id="marks">
+                    <input type="number" name="marks" required placeholder="Marks" id="marks" min="0" max="100">
                 </div>
                 <div class="add-button btn">
                     <button type="submit" id="add">
@@ -49,28 +49,28 @@
              </table>
              <div class="bottom">
                 <div></div>
-                <div class="top-student">
+                <div class="top-student" id="top-student-element">
                     <span class="top-title">
                         <h3>Top Student</h3>
                     </span>
-                    <span class="top-name">Brian</span>
-                    <span class="top-marks">75</span>
-                    <span class="top-grade">A</span>
+                    <span class="top-name" id="top-student-name"></span>
+                    <span class="top-marks" id="top-student-marks"></span>
+                    <span class="top-grade" id="top-student-grade"></span>
                 </div>
                 <div class="calculate-button btn">
-                    <button type="submit" id="add">
+                    <button type="submit" id="calculate">
                         <span class="btn-text">Calculate</span>
                     </button>
                 </div>
              </div>
         </div>
         <!-- Total students -->
-        <div class="summary-info">
+        <div class="summary-info" id="summary">
             <div class="total-students summary">
                 <span class="summary-label">
                     Total Students
                 </span>
-                <h1 class="summary-value">10</h1>
+                <h1 class="summary-value" id="total-students"></h1>
             </div>
 
             <!-- Class average -->
@@ -78,7 +78,7 @@
                 <span class="summary-label">
                     Class Average
                 </span>
-                <h1 class="summary-value">67.4</h1>
+                <h1 class="summary-value" id="class-average"></h1>
             </div>
 
             <!-- Pass Fail Summary -->
@@ -88,8 +88,8 @@
                         Pass
                     </span>
                     <div class="pass-fail-value">
-                        <h1 class="summary-value">07</h1>
-                        <span class="percentage">(70%)</span>
+                        <h1 class="summary-value" id="pass-count"></h1>
+                        <span class="percentage" id="pass-percentage"></span>
                     </div>
                 </div>
 
@@ -98,8 +98,8 @@
                         Fail
                     </span>
                     <div class="pass-fail-value">
-                        <h1 class="summary-value">03</h1>
-                        <span class="percentage">(30%)</span>
+                        <h1 class="summary-value" id="fail-count"></h1>
+                        <span class="percentage" id="fail-percentage"></span>
                     </div>
                 </div>
             </div>
