@@ -2,7 +2,7 @@
 const students = [
     { id: 1, name: "Brian", marks: 85 },
     { id: 2, name: "Sarah", marks: 72 },
-    // { id: 3, name: "Kevin", marks: 45 },
+    { id: 3, name: "Kevin", marks: 45 },
     { id: 4, name: "Mary", marks: 91 },
     { id: 5, name: "David", marks: 58 },
     { id: 6, name: "Faith", marks: 34 },
@@ -16,35 +16,8 @@ const students = [
 const newStudentName = document.getElementById("first-name")
 const newStudentMarks = document.getElementById("marks")
 const addButton = document.getElementById("add")
-const form = document.getElementById("form")
 const errorElement = document.getElementById('error')
-
-
-addButton.addEventListener("click", (e) => {
-    const messages = []
-    const newId = []
-    students.forEach((student) => {
-        newId.push(student.id)
-    })
-
-    if (newStudentName.value === '' || newStudentName.value === null) {
-        messages.push("Name is required")
-    } else if (newStudentMarks.value === '' || newStudentMarks.value === null) {
-        messages.push("Marks is required")
-    } else {
-        students.push({id: Math.max(...newId) + 1, name: newStudentName.value, marks: +newStudentMarks.value})
-        console.log(students)
-        e.preventDefault()
-    }
-
-    if (messages.length > 0) {
-        e.preventDefault()
-        errorElement.innerText = messages.join(', ')
-    } else {
-        errorElement.innerText = ''
-    }
-})
-
+const studentsTable = document.getElementById("students")
 
 const checkGrade = (marks) => {
     if (marks > 100 || marks < 0) return "Invalid"
@@ -126,8 +99,35 @@ if (students.length === 0) {
     console.log(`Fail Rate: ${(failedStudents / getStudentsInfo.length) * 100}`)
 }
 
+
+addButton.addEventListener("click", (e) => {
+    const messages = []
+    const newId = []
+    const trimmedName = newStudentName.value.trim()
+    students.forEach((student) => {
+        newId.push(student.id)
+    })
+
+    if (trimmedName === '' || !isNaN(trimmedName)) {
+        messages.push("Valid name is required")
+    }
+
+    if (newStudentMarks.value === '') {
+        messages.push("Marks is required")
+    }
+
+    if (messages.length > 0) {
+        e.preventDefault()
+        errorElement.innerText = messages.join(', ')
+    } else {
+        errorElement.innerText = ''
+        students.push({ id: Math.max(...newId) + 1, name: trimmedName, marks: +newStudentMarks.value })
+        console.log(students)
+        e.preventDefault()
+    }
+})
+
 // Update student table info
-const studentsTable = document.getElementById("students")
 const addRow = (number, name, marks, grade, status) => {
     const row = document.createElement("tr")
 
@@ -136,7 +136,7 @@ const addRow = (number, name, marks, grade, status) => {
     <td>${name}</td>
             <td>${marks}</td>
             <td>${grade}</td>
-            <td>${status}</td>
+            <td><span>${status}</span></td>
             `
 
     studentsTable.appendChild(row)

@@ -17,7 +17,6 @@
             <i class="fa-solid fa-bars"></i>
         </header>
     </nav>
-
     <main>
         <div class="main-info">
             <span id="error"></span>
@@ -36,17 +35,20 @@
                 </div>
             </form>
             <!-- Table record -->
-             <table>
+             <table class="students-record">
                 <thead>
-                    <tr>No.</tr>
-                    <tr>Name</tr>
-                    <tr>Marks</tr>
-                    <tr>Grade</tr>
-                    <tr>Status</tr>
+                    <tr>
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Marks</th>
+                        <th>Grade</th>
+                        <th>Status</th>
+                    </tr>
                 </thead>
                 <tbody id="students"></tbody>
              </table>
              <div class="bottom">
+                <div></div>
                 <div class="top-student">
                     <span class="top-title">
                         <h3>Top Student</h3>
@@ -55,7 +57,7 @@
                     <span class="top-marks">75</span>
                     <span class="top-grade">A</span>
                 </div>
-                <div class="add-button btn">
+                <div class="calculate-button btn">
                     <button type="submit" id="add">
                         <span class="btn-text">Calculate</span>
                     </button>
@@ -85,16 +87,20 @@
                     <span class="summary-label">
                         Pass
                     </span>
-                    <h1 class="summary-value">07</h1>
-                    <span class="percentage">(70%)</span>
+                    <div class="pass-fail-value">
+                        <h1 class="summary-value">07</h1>
+                        <span class="percentage">(70%)</span>
+                    </div>
                 </div>
 
                 <div class="fail summary">
                     <span class="summary-label">
                         Fail
                     </span>
-                    <h1 class="summary-value">03</h1>
-                    <span class="percentage">(30%)</span>
+                    <div class="pass-fail-value">
+                        <h1 class="summary-value">03</h1>
+                        <span class="percentage">(30%)</span>
+                    </div>
                 </div>
             </div>
         </div>
