@@ -87,13 +87,22 @@ form {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    height: 50px;
+}
+
+form .details-input.input .user-input {
+    display: flex;
+    /* flex-direction: column; */
+    width: 100%;
+}
+
+form .details-input.input .user-input input {
+    width: 100%;
 }
 
 .main-info input {
     margin-right: 30px;
     height: 100%;
-    width: 260px;
+    width: 100%;
     padding: 10px 15px;
     margin-bottom: 22px;
     font-size: 1.1em;
@@ -139,7 +148,9 @@ input:focus {
 }
 
 .details-input {
-    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .students-record {
@@ -282,7 +293,11 @@ input:focus {
         align-items: end;
     }
 
-    .details-input {
+    form {
+        flex-direction: column;
+    }
+
+    form .details-input.input .user-input {
         flex-direction: column;
     }
 }
