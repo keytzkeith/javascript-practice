@@ -72,6 +72,7 @@ main {
 .main-info {
     display: flex;
     flex-direction: column;
+    width: 100%;
     margin: 0 0 22px 0;
 }
 
@@ -84,7 +85,7 @@ main {
 
 form {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     height: 50px;
 }
@@ -93,7 +94,8 @@ form {
     margin-right: 30px;
     height: 100%;
     width: 260px;
-    padding: 0 15px;
+    padding: 10px 15px;
+    margin-bottom: 22px;
     font-size: 1.1em;
     background-color: var(--secondary-light);
     color: var(--primary);
@@ -156,8 +158,22 @@ input:focus {
     color: var(--secondary-light);
 }
 
+/* Define the entrance animation */
+@keyframes rowFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .students-record tbody tr {
     border-bottom: 0.5px solid #aeb6a8;
+    animation: rowFadeIn 0.35s ease-out forwards;
 }
 
 .students-record tbody tr:nth-of-type(even) {
@@ -167,6 +183,24 @@ input:focus {
 
 .students-record tbody tr td span {
     border: solid 0.2px var(--secondary);
+    border-radius: 50px;
+    padding: 5px 10px;
+    font-weight: 500;
+}
+
+.students-record tbody tr td span#fail-status {
+    border: solid 0.2px #f05461;
+    color: #f05461;
+    background-color: #f054611e;
+    border-radius: 50px;
+    padding: 5px 10px;
+    font-weight: 500;
+}
+
+.students-record tbody tr td span#pass-status {
+    border: solid 0.2px #3bb659;
+    color: #1e792c;
+    background-color: #54f05c1e;
     border-radius: 50px;
     padding: 5px 10px;
     font-weight: 500;
@@ -239,4 +273,16 @@ input:focus {
     font-size: .9em;
     margin-bottom: 10px;
     color: var(--danger);
+}
+
+@media (max-width: 900px) {
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+
+    .details-input {
+        flex-direction: column;
+    }
 }

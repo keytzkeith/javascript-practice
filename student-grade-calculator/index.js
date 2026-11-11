@@ -1,8 +1,8 @@
 // Student records for the grade calculator
 const students = [
     // { id: 1, name: "Brian", marks: 85 },
-    // { id: 2, name: "Sarah", marks: 72 },
-    // { id: 3, name: "Kevin", marks: 45 },
+    { id: 2, name: "Sarah", marks: 72 },
+    { id: 3, name: "Kevin", marks: 45 },
     // { id: 4, name: "Mary", marks: 91 },
     // { id: 5, name: "David", marks: 58 },
     // { id: 6, name: "Faith", marks: 34 },
@@ -97,7 +97,6 @@ const classAverage = () => {
     return average
 }
 
-
 // Update student table info
 const addRow = (number, name, marks, grade, status) => {
     const row = document.createElement("tr")
@@ -107,7 +106,7 @@ const addRow = (number, name, marks, grade, status) => {
     <td>${name}</td>
             <td>${marks}</td>
             <td>${grade}</td>
-            <td><span>${status}</span></td>
+            <td><span id="${status === 'Pass' ? 'pass-status' : 'fail-status'}">${status}</span></td>
             `
 
     studentsTable.appendChild(row)
@@ -128,9 +127,9 @@ const renderTable = () => {
 renderTable()
 
 // Add new student
-form.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
     const messages = []
-    const newId = []
+    let newId = 0
     const trimmedName = newStudentName.value.trim()
 
     const studentExists = students.some(student => 
@@ -138,7 +137,7 @@ form.addEventListener("click", (e) => {
     )
 
     students.forEach((student) => {
-        newId.push(student.id)
+        newId += student.id
     })
     if (studentExists)  {
         messages.push(`Student ${trimmedName} already exists`)
@@ -157,7 +156,7 @@ form.addEventListener("click", (e) => {
         errorElement.innerText = messages.join(', ')
     } else {
         errorElement.innerText = ''
-        students.push({ id: Math.max(...newId) + 1, name: trimmedName, marks: +newStudentMarks.value })
+        students.push({ id: newId + 1, name: trimmedName, marks: +newStudentMarks.value })
         renderTable()
         // console.log(students)
         e.preventDefault()
