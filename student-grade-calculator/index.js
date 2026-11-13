@@ -1,8 +1,8 @@
 // Student records for the grade calculator
 const students = [
     // { id: 1, name: "Brian", marks: 85 },
-    { id: 2, name: "Sarah", marks: 72 },
-    { id: 3, name: "Kevin", marks: 45 },
+    // { id: 2, name: "Sarah", marks: 72 },
+    // { id: 3, name: "Kevin", marks: 45 },
     // { id: 4, name: "Mary", marks: 91 },
     // { id: 5, name: "David", marks: 58 },
     // { id: 6, name: "Faith", marks: 34 },
@@ -185,8 +185,11 @@ const renderSummary = () => {
 
 calculateButton.addEventListener('click', () => {
     renderSummary()
-    topStudentContainer.style.display = 'flex'
-    summaryContainer.style.display = 'flex'
+    const studentInfo = getStudentsInfo()
+    if (studentInfo.length !== 0) {
+        topStudentContainer.style.display = 'flex'
+        summaryContainer.style.display = 'flex'
+    }
 })
 
 
