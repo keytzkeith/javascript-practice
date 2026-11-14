@@ -16,7 +16,7 @@ State management
 Input validation
 */
 
-let attempts = 0
+let attempts = 12
 const MAX_ATTEMPTS = 10
 
 const randomNumber = () => {
@@ -39,14 +39,13 @@ const checkGuess = (guess) => {
 }
 
 const playGame = (guess) => {
-    if (attempts > MAX_ATTEMPTS) {
-        return "Game is over"
-    }
+    if (attempts > MAX_ATTEMPTS) return "Game is over"
     attempts++
     const guessedNumber = checkGuess(guess)
+    
+
+    
     return guessedNumber
 }
 
-
-console.log(playGame(34), attempts)
-console.log(secretNumber)
+console.log(playGame(21), attempts)
