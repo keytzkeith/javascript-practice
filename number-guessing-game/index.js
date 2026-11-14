@@ -39,15 +39,14 @@ const checkGuess = (guess) => {
 }
 
 const playGame = (guess) => {
-    for (let i = 0; i < MAX_ATTEMPTS; i++) {
-        attempts++
-        const guessedNumber = checkGuess(guess)
-        if (attempts === MAX_ATTEMPTS) {
-            return "Game is over"
-        }
-        return guessedNumber
+    if (attempts > MAX_ATTEMPTS) {
+        return "Game is over"
     }
+    attempts++
+    const guessedNumber = checkGuess(guess)
+    return guessedNumber
 }
+
 
 console.log(playGame(34), attempts)
 console.log(secretNumber)
